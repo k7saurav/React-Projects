@@ -9,7 +9,7 @@ function App() {
    This hook is responsible for changing the state on UI. It doesn't mean that it is changing the value of the variable while it means the change is propogate inside the DOM and reflect on the UI.
    ---> here, the default value inside the useState can be anything. i.e., boolean, number, array, string, etc (depends on use case).
    ---> here, count is a variable with default state value 10.
-   ---> and, setCount is a function used to update the state.
+   ---> and, setCount is a callback function used to update the state.
    */
 
    // let count = 10;
