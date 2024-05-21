@@ -3,8 +3,8 @@ import { useState, useCallback, useEffect, useRef } from "react";
 /* 
 1. useState Hook is used to change the state of a variable on the UI.
 2. useCallback is used to cache a function definition between re-renders.
-3. useEffect is used to 
-4. useRef is uesd to 
+3. useEffect is used to synchronize a component with an external system.
+4. useRef is uesd to reference a value that’s not needed for rendering.
 */
 
 function App() {
@@ -32,10 +32,11 @@ function App() {
       setPassword(pass);
    }, [length, numberAllowed, charAllowed, setPassword]);
    /* 
-   Here, useCallback's dependencies are used for code optimization. 
-   It is resposible to memorise the privious values.
-   It returns the function passed inside. It doesn't call the function.
-   If given 'password' instead of 'setPassword' as dependency, it go in infinite loop and continuosly generating the password.
+   -> Here, useCallback's dependencies are used for code optimization. We should use all the dependencies (i.e., variables and functions) which are going to be used in the useCallback's function.
+   -> useCallback is resposible for optimize performance by memoizing functions and avoiding unnecessary re-renders.
+   -> useCallback returns the function passed inside (an arrow fn, in this case), but doesn't call the function. This function value is cached. Also, it can take any arguments and return any values.
+   -> If dependencies have not changed, React will return the same fn. Otherwise, it will give the function that have passed during the current render, and store it in case it can be reused later.
+   -> If given 'password' instead of 'setPassword' as dependency, it will go in infinite loop and continuosly generating the password. (Also we haven't use the variable 'password' inside useCallback's function. Therefore it should not be given as dependency)
    */
 
    //  useRef hook
@@ -48,10 +49,19 @@ function App() {
       window.navigator.clipboard.writeText(password);
    }, [password]);
 
-   //  useEffect hook. It is responsible for run the function.
+   /* useEffect uses a setup as a function and an array as dependencies inside it.
+  Refer to the documentaion.
+  useEffect hook. It is responsible for run the function.
+  */
    useEffect(() => {
       passwordGenerator();
+
    }, [length, numberAllowed, charAllowed, passwordGenerator]);
+   /* 
+   -> Here, the arrow function (called setup fn for useEffect) contains Effect's logic. This setup function may also optionally return a cleanup function (if we provide, such as cancelling network requests, removing event listeners, or invalidating timers).
+   -> After every re-render with changed dependencies, React will first run the cleanup function with the old values, and then run setup function with the new values.
+   -> Dependencies are same as useCallback.
+   */
 
    return (
       <>
