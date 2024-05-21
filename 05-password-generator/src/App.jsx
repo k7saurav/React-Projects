@@ -35,7 +35,7 @@ function App() {
    -> Here, useCallback's dependencies are used for code optimization. We should use all the dependencies (i.e., variables and functions) which are going to be used in the useCallback's function.
    -> useCallback is resposible for optimize performance by memoizing functions and avoiding unnecessary re-renders.
    -> useCallback returns the function passed inside (an arrow fn, in this case), but doesn't call the function. This function value is cached. Also, it can take any arguments and return any values.
-   -> If dependencies have not changed, React will return the same fn. Otherwise, it will give the function that have passed during the current render, and store it in case it can be reused later.
+   -> If dependencies have not changed, React will return the same fn. Otherwise, it will return the function that have passed during the current render, and store it in case it can be reused later.
    -> If given 'password' instead of 'setPassword' as dependency, it will go in infinite loop and continuosly generating the password. (Also we haven't use the variable 'password' inside useCallback's function. Therefore it should not be given as dependency)
    */
 
