@@ -29,6 +29,7 @@ export default function Github() {
 }
 
 // Loader concept (recommanded): we should create a method for API call seperatly (actually, in a seperate file) 
+// eslint-disable-next-line react-refresh/only-export-components
 export const githubInfoLoader = async () => {
    const response = await fetch('https://api.github.com/users/k7saurav')
    return response.json()
