@@ -6,11 +6,7 @@ function App() {
 
   return (
     <>
-    {/* <Header /> */}
-    <div className='bg-gray-800 w-full h-screen'>
-      <h2 className='text-3xl text-center text-blue-50 pt-2'>React Router</h2>
-    </div>
-    <Footer />
+      {/* we don't need to render App.jsx here, we can directly render all the components in the main.jsx file throw Layout.jsx file. */}
     </>
   )
 }
